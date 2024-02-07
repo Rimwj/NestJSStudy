@@ -15,6 +15,7 @@ TypeScript can automatically set the type of variables based on the assigned val
     let numbers = [1, 2, 3]; // inferred as number[]
     let truths = [true, false, true]; // inferred as boolean[]
 }
+```
 
 ## Type Annotations
 You can explicitly set the type of variables. This provides TypeScript with exact type information.
@@ -31,6 +32,7 @@ You can explicitly set the type of variables. This provides TypeScript with exac
     let numbers: number[] = [1, 2, 3];
     let truths: boolean[] = [true, false, true];
 }
+```
 
 ## When Type Inference Is Not Enough
 
@@ -53,3 +55,4 @@ There are cases where TypeScript's type inference is not sufficient. For example
 
     let coordinates2: Point = JSON.parse(json);
 }
+```
