@@ -1,17 +1,25 @@
-//Type Inference <-TS가 Type을 자동으로 설정함.
+# TypeScript Type Inference vs Type Annotations
+
+## Type Inference
+TypeScript can automatically set the type of variables based on the assigned values. Here is how TypeScript infers the type for each variable:
+
+```typescript
 {
-    let apples = 5;
-    let speed = 'fast';
-    let isActive = false;
-    let nothingMuch = null;
-    let nothing = undefined;
-    let now = new Date();
-    let color = ['red', 'green', 'blue'];
-    let numbers = [1, 2, 3];
-    let truths = [true, false, true];
+    let apples = 5; // inferred as number
+    let speed = 'fast'; // inferred as string
+    let isActive = false; // inferred as boolean
+    let nothingMuch = null; // inferred as null
+    let nothing = undefined; // inferred as undefined
+    let now = new Date(); // inferred as Date
+    let color = ['red', 'green', 'blue']; // inferred as string[]
+    let numbers = [1, 2, 3]; // inferred as number[]
+    let truths = [true, false, true]; // inferred as boolean[]
 }
 
-//Type annotations <- 사용자가 명시적으로 Type을 설정함.
+## Type Annotations
+You can explicitly set the type of variables. This provides TypeScript with exact type information.
+
+```typescript
 {
     let apples: number = 5;
     let speed: string = 'fast';
@@ -24,24 +32,24 @@
     let truths: boolean[] = [true, false, true];
 }
 
-//Type inference를 사용할 수 없는 경우
+## When Type Inference Is Not Enough
+
+There are cases where TypeScript's type inference is not sufficient. For example, the return type of `JSON.parse` can be quite varied, necessitating explicit type annotations.
+
+```typescript
 {
     const json = '{"x":10,"y":20}';
-    let coordinates = JSON.parse(json);
+    let coordinates = JSON.parse(json); // `coordinates` is treated as `any` type
 
-    //JSON.parse는 number, string, object 등 여러 타입을 반환 할 수 있기 때문에 any취급된다.
-    //따라서 coordinates도 any타입
-
+    // Since `JSON.parse` can return multiple types, explicit type annotation is necessary for `coordinates`.
     coordinates.thisisnothing = 1;
     coordinates = 123123;
 
-    // 이 경우 명시적으로 타입을 정해줘야 함. - 보통 서비스에서는 Dto 혹은 Domain이 존재할 것이기 때문에 해당 Interface를 지정해주면 될 것 같음.
-
+    // Solve it by using explicit type annotations
     interface Point {
         x: number;
         y: number;
     }
 
     let coordinates2: Point = JSON.parse(json);
-
 }
