@@ -1,1 +1,47 @@
-ㅁ
+//Type Inference <-TS가 Type을 자동으로 설정함.
+{
+    let apples = 5;
+    let speed = 'fast';
+    let isActive = false;
+    let nothingMuch = null;
+    let nothing = undefined;
+    let now = new Date();
+    let color = ['red', 'green', 'blue'];
+    let numbers = [1, 2, 3];
+    let truths = [true, false, true];
+}
+
+//Type annotations <- 사용자가 명시적으로 Type을 설정함.
+{
+    let apples: number = 5;
+    let speed: string = 'fast';
+    let isActive: boolean = false;
+    let nothingMuch: null = null;
+    let nothing: undefined = undefined;
+    let now: Date = new Date();
+    let color: string[] = ['red', 'green', 'blue'];
+    let numbers: number[] = [1, 2, 3];
+    let truths: boolean[] = [true, false, true];
+}
+
+//Type inference를 사용할 수 없는 경우
+{
+    const json = '{"x":10,"y":20}';
+    let coordinates = JSON.parse(json);
+
+    //JSON.parse는 number, string, object 등 여러 타입을 반환 할 수 있기 때문에 any취급된다.
+    //따라서 coordinates도 any타입
+
+    coordinates.thisisnothing = 1;
+    coordinates = 123123;
+
+    // 이 경우 명시적으로 타입을 정해줘야 함. - 보통 서비스에서는 Dto 혹은 Domain이 존재할 것이기 때문에 해당 Interface를 지정해주면 될 것 같음.
+
+    interface Point {
+        x: number;
+        y: number;
+    }
+
+    let coordinates2: Point = JSON.parse(json);
+
+}
